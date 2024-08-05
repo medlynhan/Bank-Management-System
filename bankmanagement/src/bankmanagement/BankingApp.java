@@ -12,7 +12,7 @@ public class BankingApp {
 		System.out.println("|                                                         |");
 		System.out.println("|=========================================================|");
 	}
-	private static final  String connectUrl="jdbc:sqlserver://TG\\SQLEXPRESS;DatabaseName=BankManagementSystem;IntegratedSecurity=true;encrypt=true;trustServerCertificate=true";
+	private static final  String connectUrl="jdbc:sqlserver://dEVICEnAME\\SQLEXPRESS;DatabaseName=BankManagementSystem;IntegratedSecurity=true;encrypt=true;trustServerCertificate=true";
     public static void main(String[] args) {
     	headerOfFrontPage();
         try{
