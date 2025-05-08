@@ -2,6 +2,13 @@ package bankmanagement;
 import java.sql.*;
 import java.util.*;
 
+/*
+ * smell code: long method
+ * reason: function seperti register() dan login() memiliki kode yang numpuk dengan tanggung jawab beda
+ *         seperti handle user input, sql queries, dan validasi input.
+ * solution: extract method
+ */
+
 public class User {
     private Connection connection;
     private Scanner scanner;
