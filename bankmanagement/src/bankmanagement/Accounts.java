@@ -1,6 +1,15 @@
 package bankmanagement;
 import java.sql.*;
 import java.util.Scanner;
+
+/* Smell code : Long Method 
+ * Reasons : Developer membuat code sebuah method yang terlalu panjang (open_account mengatur banyak logika)
+ * Solutions : Extract method
+ *
+ * 
+ */
+
+
 public class Accounts {
     private Connection connection;
     private Scanner scanner;

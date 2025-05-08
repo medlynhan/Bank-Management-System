@@ -1,6 +1,30 @@
 package bankmanagement;
 import java.sql.*;
 import java.util.Scanner;
+
+
+/* Smell code : Long Method 
+ * Reasons : Developer membuat code sebuah method yang terlalu panjang (credit_money, debit_money, transfer_money)
+ * Solutions : Extract method
+ * 
+ * Smell code : Large Class
+ * Reasons : Developer membuat suatu class yang sangat besar, tidak fokus hanya pada 1 logika, 
+ *           method yang terkait dengan penarikan uang, credit, debit, transfer bisa dikelompokkan menjadi 1 class tersendiri
+ * Solutions : Extract class
+ * 
+ * Smell code : Duplicate Code 
+ * Reasons : Developer lebih suka membuat logika yang ditulis berulang , dibanding membuatnya menjadi satu method baru,
+ *           logika untuk verifikasi account_number diulang di berbagai method seperti credit_money, debit_money, dan transfer_money
+ * Solutions : Extract method
+ * 
+ * Smell code : Primitive Obsession
+ * Reasons : Developer membuat sebuah data yang harusnya bisa dibuat menjadi sebuah object, malah dibuat jadi primitive variabel 
+ *           seperti String security_pin yang seharusnya bisa dibuat menjadi 1 object/class baru
+ * Solutions : Extract class
+ * 
+ */
+
+
 public class AccountManager {
     private Connection connection;
     private Scanner scanner;
@@ -23,8 +47,7 @@ public class AccountManager {
         }
 	}catch(SQLException e) {
 		e.printStackTrace();
-	}
-    }
+	}    }
     
     public void min(){
 	scanner.nextLine();
