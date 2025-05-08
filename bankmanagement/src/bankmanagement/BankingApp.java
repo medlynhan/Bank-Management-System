@@ -2,19 +2,19 @@ package bankmanagement;
 import java.sql.*;
 import java.util.*;
 /*
- * Code Smell 	: Long Method
+ * Code Smell 		: Long Method
  * Reason		: Terlalu banyak method pada main
  * Solution		: Move Method
  * 
- * Code Smell 	: Large Class
+ * Code Smell 		: Large Class
  * Reason 		: Teralalu banyak tanggung jawab pada satu class
- * Solution 	: Extract Class 
+ * Solution 		: Extract Class 
  * 
- * Code Smell 	: Swtich Statements
+ * Code Smell 		: Swtich Statements
  * Reason 		: Terlalu banyak logika switch case(case, if-else)
  * Solution		: Extract Method
  * 
- * Code Smell 	: Duplicate Code
+ * Code Smell 		: Duplicate Code
  * Reason 		: Terdapat code yang digunakan lebih dari sekali yaitu untuk input choice
  * Solution		: Extract Method
  * 
