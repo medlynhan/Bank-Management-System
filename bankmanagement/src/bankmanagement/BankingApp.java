@@ -1,6 +1,24 @@
 package bankmanagement;
 import java.sql.*;
 import java.util.*;
+/*
+ * Code Smell 	: Long Method
+ * Reason		: Terlalu banyak method pada main
+ * Solution		: Move Method
+ * 
+ * Code Smell 	: Large Class
+ * Reason 		: Teralalu banyak tanggung jawab pada satu class
+ * Solution 	: Extract Class 
+ * 
+ * Code Smell 	: Swtich Statements
+ * Reason 		: Terlalu banyak logika switch case(case, if-else)
+ * Solution		: Extract Method
+ * 
+ * Code Smell 	: Duplicate Code
+ * Reason 		: Terdapat code yang digunakan lebih dari sekali yaitu untuk input choice
+ * Solution		: Extract Method
+ * 
+ * */
 public class BankingApp {
 	public static void headerOfFrontPage() {
 		System.out.println("|^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^|");
