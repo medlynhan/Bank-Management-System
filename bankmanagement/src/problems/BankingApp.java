@@ -10,6 +10,10 @@ import java.util.*;
  * Reason 		: Teralalu banyak tanggung jawab pada satu class
  * Solution 		: Extract Class 
  * 
+ * Code Smell 		: Temporary Field
+ * Reason		: Terdapat beberapa field yang digunakan pada saat method tertentu saja
+ * Solution 		: Move Field
+ *
  * Code Smell 		: Swtich Statements
  * Reason 		: Terlalu banyak logika switch case(case, if-else)
  * Solution		: Extract Method
