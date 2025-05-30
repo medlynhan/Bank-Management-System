@@ -22,6 +22,14 @@ import java.util.*;
  * Reason 		: Terdapat code yang digunakan lebih dari sekali yaitu untuk input choice
  * Solution		: Extract Method
  * 
+ * Code Smell 		: Multifaced Abstraction
+ * Reason 		: Class BankingApp menyatukan berbagai jenis logika user handling, account management, transaksi, dan UI dalam satu Class,
+ *         			sehingga terlalu banyak memiliki tanggung jawab.
+ * Solution		: Move Method
+ *
+ * Code Smell 		:
+ * Reason		:
+ * Solution		: 
  * */
 public class BankingApp {
 	public static void headerOfFrontPage() {
