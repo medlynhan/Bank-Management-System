@@ -40,7 +40,7 @@ public class BankingApp {
 		System.out.println("|^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^|");
 		System.out.println("|                                                         |");
 		System.out.println("|                                                         |");
-		System.out.println("|          █▓▒▒░░░𝓦 𝓔 𝓛 𝓒 𝓞 𝓜 𝓔   𝓣 𝓞 ░░░▒▒▓█             |");
+		System.out.println("|          █▓▒▒░░░W e l c o m e   T o ░░░▒▒▓█             |");
 		System.out.println("|█▓▒▒░░░B A N K   M A N A G E M E N T   S Y S T E M░░░▒▒▓█|");
 		System.out.println("|                                                         |");
 		System.out.println("|                                                         |");

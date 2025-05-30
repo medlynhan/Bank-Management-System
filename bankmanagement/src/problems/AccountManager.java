@@ -22,6 +22,13 @@ import java.util.Scanner;
  *           seperti String security_pin yang seharusnya bisa dibuat menjadi 1 object/class baru
  * Solutions : Extract class
  * 
+ * Smell code : Insufficient Modularization
+ * Reasons : Semua logika berada di dalam satu class, tidak dipisahkan berdasarkan tanggung jawabnya.
+ * Solutions : pindah logika transaksi, input handling, dan verifikasi ke class terpisah.
+ *
+ * Smell code : Deficient Encapsulation
+ * Reasons : sensitif logic seperti verifikasi account_number, security pin dan update balance tidak di encapsulate dengan baik, sehingga bisa diakses sembarangan.
+ * Solutions : pake private method untuk menangani logika yang tidak perlu diakses dari luar class.
  */
 
 
