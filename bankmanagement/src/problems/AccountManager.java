@@ -24,7 +24,7 @@ import java.util.Scanner;
  * 
  * Smell code : Insufficient Modularization
  * Reasons : Semua logika berada di dalam satu class, tidak dipisahkan berdasarkan tanggung jawabnya.
- * Solutions : pindah logika transaksi, input handling, dan verifikasi ke class terpisah.
+ * Solutions : pindah logika transaksi, input handling, dan verifikasi ke class terpisah. Extract class.
  *
  * Smell code : Deficient Encapsulation
  * Reasons : sensitif logic seperti verifikasi account_number, security pin dan update balance tidak di encapsulate dengan baik, sehingga bisa diakses sembarangan.

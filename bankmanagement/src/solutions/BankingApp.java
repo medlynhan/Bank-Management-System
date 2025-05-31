@@ -85,7 +85,7 @@ public class BankingApp {
                                         accountManager.transfer_money(account_number);
                                         break;
                                     case 4:
-                                        accountManager.getBalance(account_number);
+                                        accountManager.getTotalAccountBalance(account_number);
                                         break;
                                     case 5:
                                         break;
@@ -104,9 +104,9 @@ public class BankingApp {
                     	System.out.println("2. MIN");
                     	int ch=scanner.nextInt();
                     	if(ch==1) {
-                    		accountManager.max();break;
+                    		accountManager.getMaxAccountBalance();break;
                     	}else if(ch==2) {
-                    		accountManager.min();break;
+                    		accountManager.getMinAccountBalance();break;
                     	}else {
                     		System.out.println("invalid choice for MAN/MIN");break;
                     	}
