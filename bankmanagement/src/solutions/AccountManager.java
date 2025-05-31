@@ -40,11 +40,11 @@ public class AccountManager {
     public void credit_money(long account_number) throws SQLException {
         scanner.nextLine();
         double amount = inputAmount();
-        SecurityPin security_pin = inputPin();
+        String security_pin = inputPin();
         
         try {
             connection.setAutoCommit(false);
-            if (account_number != 0 && accRepo.verifyAccount(account_number, security_pin.getPin())) {
+            if (account_number != 0 && accRepo.verifyAccount(account_number, security_pin)) {
                 if (accRepo.updateBalance(account_number, amount, true)) {
                     System.out.println("Rs." + amount + " credited Successfully");
                     connection.commit();
@@ -66,11 +66,11 @@ public class AccountManager {
     public void debit_money(long account_number) throws SQLException {
         scanner.nextLine();
         double amount = inputAmount();
-        SecurityPin security_pin = inputPin();
+        String security_pin = inputPin();
         
         try {
             connection.setAutoCommit(false);
-            if (account_number != 0 && accRepo.verifyAccount(account_number, security_pin.getPin())) {
+            if (account_number != 0 && accRepo.verifyAccount(account_number, security_pin)) {
                 double current_balance = accRepo.getCurrentBalance(account_number);
                 if (amount <= current_balance) {
                     if (accRepo.updateBalance(account_number, amount, false)) {
@@ -99,11 +99,11 @@ public class AccountManager {
         System.out.print("Enter Receiver Account Number: ");
         long receiver_account_number = scanner.nextLong();
         double amount = inputAmount();
-        SecurityPin security_pin = inputPin();
+        String security_pin = inputPin();
         
         try {
             connection.setAutoCommit(false);
-            if (sender_account_number != 0 && receiver_account_number != 0 && accRepo.verifyAccount(sender_account_number, security_pin.getPin())) {
+            if (sender_account_number != 0 && receiver_account_number != 0 && accRepo.verifyAccount(sender_account_number, security_pin)) {
                 double current_balance = accRepo.getCurrentBalance(sender_account_number);
                 if (amount <= current_balance) {
                     if (accRepo.updateBalance(sender_account_number, amount, false) && accRepo.updateBalance(receiver_account_number, amount, true)) {
@@ -129,9 +129,9 @@ public class AccountManager {
     }
     
     public void getTotalAccountBalance(long account_number){
-        SecurityPin security_pin = inputPin();
+        String security_pin = inputPin();
         try {
-            if (accRepo.verifyAccount(account_number, security_pin.getPin())) {
+            if (accRepo.verifyAccount(account_number, security_pin)) {
                 double balance = accRepo.getCurrentBalance(account_number);
                 System.out.println("Balance: " + balance);
             } else {
@@ -154,10 +154,10 @@ public class AccountManager {
         return scanner.nextDouble();
     }
 
-    private SecurityPin inputPin() {
+    private String inputPin() {
         scanner.nextLine();
         System.out.print("Enter Security Pin: ");
         String pin = scanner.nextLine();
-        return new SecurityPin(pin);
+        return pin;
     }
 }
