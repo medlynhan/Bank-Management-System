@@ -11,6 +11,9 @@ public class BankingApp {
         System.out.println("2. Login");
         System.out.println("3. Max/Min");
         System.out.println("4. Exit");
+        enterChoice();
+    }
+    public static void enterChoice(){
         System.out.println("Enter your choice: ");
     }
 
@@ -24,6 +27,7 @@ public class BankingApp {
 		System.out.println("|                                                         |");
 		System.out.println("|=========================================================|");
 	}
+    
 	private static final  String connectUrl="jdbc:sqlserver://dEVICEnAME\\SQLEXPRESS;DatabaseName=BankManagementSystem;IntegratedSecurity=true;encrypt=true;trustServerCertificate=true";
     public static void main(String[] args) {
     	headerOfFrontPage();
@@ -34,9 +38,6 @@ public class BankingApp {
             Accounts accounts = new Accounts(connection, scanner);
             AccountManager accountManager = new AccountManager(connection, scanner);
 
-            String email;
-            long account_number;
-
             while(true){
                 printMenu();
                 int choice1 = scanner.nextInt();
@@ -46,71 +47,11 @@ public class BankingApp {
                         user.register();
                         break;
                     case 2:
-                        email = user.login();
-                        if(email!=null){
-                            System.out.println();
-                            System.out.println("User Logged In!");
-                            if(!accounts.account_exist(email)){
-                                System.out.println();
-                                System.out.println("1. Open a new Bank Account");
-                                System.out.println("2. Exit");
-                                if(scanner.nextInt() == 1) {
-                                    account_number = accounts.open_account(email);
-                                    System.out.println("Account Created Successfully");
-                                    System.out.println("Your Account Number is: " + account_number);
-                                }else{
-                                    break;
-                                }
-
-                            }
-                            account_number = accounts.getAccount_number(email);
-                            int choice2 = 0;
-                            while (choice2 != 5) {
-                                System.out.println();
-                                System.out.println("1. Debit Money");
-                                System.out.println("2. Credit Money");
-                                System.out.println("3. Transfer Money");
-                                System.out.println("4. Check Balance");
-                                System.out.println("5. Log Out");
-                                System.out.println("Enter your choice: ");
-                                choice2 = scanner.nextInt();
-                                switch (choice2) {
-                                    case 1:
-                                        accountManager.debit_money(account_number);
-                                        break;
-                                    case 2:
-                                        accountManager.credit_money(account_number);
-                                        break;
-                                    case 3:
-                                        accountManager.transfer_money(account_number);
-                                        break;
-                                    case 4:
-                                        accountManager.getTotalAccountBalance(account_number);
-                                        break;
-                                    case 5:
-                                        break;
-                                    default:
-                                        System.out.println("Enter Valid Choice!");
-                                        break;
-                                }
-                            }
-
-                        }
-                        else{
-                            System.out.println("Incorrect Email or Password!");break;
-                        }
+                        handleLogin(scanner, user, accounts, accountManager);
+                        break;
                     case 3:
-                    	System.out.println("1. MAX");
-                    	System.out.println("2. MIN");
-                    	int ch=scanner.nextInt();
-                    	if(ch==1) {
-                    		accountManager.getMaxAccountBalance();break;
-                    	}else if(ch==2) {
-                    		accountManager.getMinAccountBalance();break;
-                    	}else {
-                    		System.out.println("invalid choice for MAN/MIN");break;
-                    	}
-                       
+                        handleMaxMin(scanner, accountManager);
+                        break;
                     case 4:
                     	 System.out.println("THANK YOU FOR USING AJK BANKING SYSTEM!!!");
                          System.out.println("Exiting System!");
@@ -122,6 +63,55 @@ public class BankingApp {
             }
         }catch (SQLException e){
             e.printStackTrace();
+        }
+    }
+
+    private static void handleLogin(Scanner scanner, User user, Accounts accounts, AccountManager accountManager) {
+        String email = user.login();
+        if (email != null) {
+            System.out.println("\nUser Logged In!");
+
+            long account_number = checkAccountExist(scanner, accounts, email);
+            if (account_number == 0) {
+                System.out.println("There is no account.");
+                return;
+            }
+            AccountMenu menu = new AccountMenu(scanner, accountManager, account_number);
+            menu.show();
+        } else {
+            System.out.println("Invalid Email or Password!");
+        }
+    }
+
+    private static long checkAccountExist(Scanner scanner, Accounts accounts, String email) {
+        if (!accounts.account_exist(email)) {
+            System.out.println("\n1. Open a new Bank Account");
+            System.out.println("2. Exit");
+            enterChoice();
+            int subChoice = scanner.nextInt();
+            if(subChoice == 1){
+                long account_number = accounts.open_account(email);
+                System.out.println("Account Created Successfully");
+                System.out.println("Your Account Number is: " + account_number);
+                return account_number;
+            } else {
+                return 0; 
+            }
+        }    
+        return accounts.getAccount_number(email);
+    }
+
+    private static void handleMaxMin(Scanner scanner, AccountManager accountManager) {
+        System.out.println("1. MAX");
+        System.out.println("2. MIN");
+        enterChoice();
+        int choice =scanner.nextInt();
+        if(choice ==1) {
+        	accountManager.getMaxAccountBalance();
+        }else if(choice ==2) {
+        	accountManager.getMinAccountBalance();
+        }else {
+            System.out.println("invalid choice for MAN/MIN");
         }
     }
 }
