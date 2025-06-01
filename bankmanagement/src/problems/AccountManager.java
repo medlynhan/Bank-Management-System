@@ -17,10 +17,6 @@ import java.util.Scanner;
  *           logika untuk verifikasi account_number diulang di berbagai method seperti credit_money, debit_money, dan transfer_money
  * Solutions : Extract method
  * 
- * Smell code : Primitive Obsession
- * Reasons : Developer membuat sebuah data yang harusnya bisa dibuat menjadi sebuah object, malah dibuat jadi primitive variabel 
- *           seperti String security_pin yang seharusnya bisa dibuat menjadi 1 object/class baru
- * Solutions : Extract class
  * 
  * Smell code : Insufficient Modularization
  * Reasons : Semua logika berada di dalam satu class, tidak dipisahkan berdasarkan tanggung jawabnya.
