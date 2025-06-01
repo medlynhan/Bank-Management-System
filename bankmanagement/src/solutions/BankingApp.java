@@ -14,16 +14,6 @@ public class BankingApp {
         enterChoice();
     }
     
-    private static void printAccountMenu() {
-        System.out.println();
-        System.out.println("1. Debit Money");
-        System.out.println("2. Credit Money");
-        System.out.println("3. Transfer Money");
-        System.out.println("4. Check Balance");
-        System.out.println("5. Log Out");
-        System.out.print("Enter your choice: ");
-    }
-    
     public static void enterChoice(){
         System.out.println("Enter your choice: ");
     }
@@ -48,6 +38,7 @@ public class BankingApp {
             User user = new User(connection, scanner);
             Accounts accounts = new Accounts(connection, scanner);
             AccountManager accountManager = new AccountManager(connection, scanner);
+            LoginService loginService = new LoginService(scanner, user, accounts, accountManager);
 
             while(true){
                 printMenu();
@@ -58,7 +49,7 @@ public class BankingApp {
                         user.register();
                         break;
                     case 2:
-                        handleLogin(scanner, user, accounts, accountManager);
+                        loginService.handleLogin();
                         break;
                     case 3:
                         handleMaxMin(scanner, accountManager);
@@ -74,80 +65,6 @@ public class BankingApp {
             }
         }catch (SQLException e){
             e.printStackTrace();
-        }
-    }
-
-    private static void handleLogin(Scanner scanner, User user, Accounts accounts, AccountManager accountManager) {
-        String email = user.login();
-        if (email != null) {
-            System.out.println("\nUser Logged In!");
-
-            long account_number = checkAccountExist(scanner, accounts, email);
-            if (account_number == 0) {
-                System.out.println("There is no account.");
-                return;
-            }
-            loginMenu(scanner, accountManager, account_number);
-        } else {
-            System.out.println("Invalid Email or Password!");
-        }
-    }
-
-    private static long checkAccountExist(Scanner scanner, Accounts accounts, String email) {
-        if (!accounts.account_exist(email)) {
-            System.out.println("\n1. Open a new Bank Account");
-            System.out.println("2. Exit");
-            enterChoice();
-            int subChoice = scanner.nextInt();
-            if(subChoice == 1){
-                long account_number = accounts.open_account(email);
-                System.out.println("Account Created Successfully");
-                System.out.println("Your Account Number is: " + account_number);
-                return account_number;
-            } else {
-                return 0; 
-            }
-        }    
-        return accounts.getAccount_number(email);
-    }
-
-    private static void loginMenu(Scanner scanner, AccountManager accountManager, long accountNumber) {
-        int choice = 0;
-        while (choice != 5) {
-            printAccountMenu();
-            choice = scanner.nextInt();
-            switch (choice) {
-                case 1:
-                    try {
-                        accountManager.debit_money(accountNumber);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case 2:
-                    try {
-                        accountManager.credit_money(accountNumber);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case 3:
-                    try {
-                        accountManager.transfer_money(accountNumber);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case 4:
-                    accountManager.getTotalAccountBalance(accountNumber);
-                    break;
-                case 5:
-                    System.out.println("Logging out...");
-                    break;
-                default:
-                    System.out.println("Enter Valid Choice!");
-                    break;
-            }
         }
     }
 
