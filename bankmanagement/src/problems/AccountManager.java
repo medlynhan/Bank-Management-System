@@ -8,8 +8,7 @@ import java.util.Scanner;
  * Solutions : Extract method
  * 
  * Smell code : Large Class
- * Reasons : Developer membuat suatu class yang sangat besar, tidak fokus hanya pada 1 logika, 
- *           method yang terkait dengan penarikan uang, credit, debit, transfer bisa dikelompokkan menjadi 1 class tersendiri
+ * Reasons : Developer membuat suatu class yang sangat besar, tidak fokus hanya pada 1 logika.
  * Solutions : Extract class
  * 
  * Smell code : Duplicate Code 
