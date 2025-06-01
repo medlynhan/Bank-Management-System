@@ -13,6 +13,17 @@ public class BankingApp {
         System.out.println("4. Exit");
         enterChoice();
     }
+    
+    private static void printAccountMenu() {
+        System.out.println();
+        System.out.println("1. Debit Money");
+        System.out.println("2. Credit Money");
+        System.out.println("3. Transfer Money");
+        System.out.println("4. Check Balance");
+        System.out.println("5. Log Out");
+        System.out.print("Enter your choice: ");
+    }
+    
     public static void enterChoice(){
         System.out.println("Enter your choice: ");
     }
@@ -76,8 +87,7 @@ public class BankingApp {
                 System.out.println("There is no account.");
                 return;
             }
-            AccountMenu menu = new AccountMenu(scanner, accountManager, account_number);
-            menu.show();
+            loginMenu(scanner, accountManager, account_number);
         } else {
             System.out.println("Invalid Email or Password!");
         }
@@ -99,6 +109,46 @@ public class BankingApp {
             }
         }    
         return accounts.getAccount_number(email);
+    }
+
+    private static void loginMenu(Scanner scanner, AccountManager accountManager, long accountNumber) {
+        int choice = 0;
+        while (choice != 5) {
+            printAccountMenu();
+            choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    try {
+                        accountManager.debit_money(accountNumber);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case 2:
+                    try {
+                        accountManager.credit_money(accountNumber);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case 3:
+                    try {
+                        accountManager.transfer_money(accountNumber);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case 4:
+                    accountManager.getTotalAccountBalance(accountNumber);
+                    break;
+                case 5:
+                    System.out.println("Logging out...");
+                    break;
+                default:
+                    System.out.println("Enter Valid Choice!");
+                    break;
+            }
+        }
     }
 
     private static void handleMaxMin(Scanner scanner, AccountManager accountManager) {
