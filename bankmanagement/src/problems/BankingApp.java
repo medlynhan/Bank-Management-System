@@ -28,12 +28,9 @@ import java.util.*;
  * Solution		: Move Method or Extract Class
  *
  * Code Smell 		: Insufficient Modularization
- * Reason		: Pada Class BankingApp terlalu memiliki tanggung jawab dan method yang banyak
+ * Reason		: Pada Class BankingApp terlalu memiliki tanggung jawab dan method yang banyak Dimana sebaiknya abstraksi atau tanggung jawab dipisahkan ke beberapa abstraction lagi
  * Solution		: Extract Class, sehingga memisahkan tanggung jawab abstraksi
  *
- * Code Smell 		:
- * Reason		:
- * Solution		: 
  * */
 public class BankingApp {
 	public static void headerOfFrontPage() {
