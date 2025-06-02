@@ -38,7 +38,7 @@ public class BankingApp {
             User user = new User(connection, scanner);
             Accounts accounts = new Accounts(connection, scanner);
             AccountManager accountManager = new AccountManager(connection, scanner);
-            LoginService loginService = new LoginService(scanner, user, accounts, accountManager);
+            UserSessionService userService = new UserSessionService(scanner, user, accounts, accountManager);
 
             while(true){
                 printMenu();
@@ -49,7 +49,7 @@ public class BankingApp {
                         user.register();
                         break;
                     case 2:
-                        loginService.handleLogin();
+                        userService.handleLogin();
                         break;
                     case 3:
                         handleMaxMin(scanner, accountManager);
