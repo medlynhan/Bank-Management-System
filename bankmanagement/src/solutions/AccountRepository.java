@@ -47,4 +47,33 @@ public class AccountRepository {
         PreparedStatement ps = connection.prepareStatement("SELECT * FROM Accounts WHERE balance = (SELECT MAX(balance) FROM Accounts)");
         return ps.executeQuery();
     }
+
+    public long makeNewAccount(long account_number, String full_name, String email, double balance, String security_pin) throws SQLException {
+    	String open_account_query = "INSERT INTO Accounts(account_number, full_name, email, balance, security_pin) VALUES(?, ?, ?, ?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(open_account_query);
+        preparedStatement.setLong(1, account_number);
+        preparedStatement.setString(2, full_name);
+        preparedStatement.setString(3, email);
+        preparedStatement.setDouble(4, balance);
+        preparedStatement.setString(5, security_pin);
+        int rowsAffected = preparedStatement.executeUpdate();
+        if (rowsAffected > 0) {
+            return account_number;
+        } else {
+            throw new RuntimeException("Account Creation failed!!");
+        }
+        
+    }
+
+    public ResultSet getAccountNumberByEmail(String email) throws SQLException {
+    	String query = "SELECT account_number from Accounts WHERE email = ?";
+    	PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, email);
+        return preparedStatement.executeQuery();
+    }
+
+    public ResultSet getTheLastAccountNumber() throws SQLException {
+        Statement statement = connection.createStatement();
+        return statement.executeQuery("SELECT top 1 account_number from Accounts ORDER BY account_number DESC");
+    }
 }
