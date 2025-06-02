@@ -2,11 +2,15 @@ package problems;
 import java.sql.*;
 import java.util.Scanner;
 
-/* Smell code : Long Method 
- * Reasons : Developer membuat code sebuah method yang terlalu panjang (open_account mengatur banyak logika)
- * Solutions : Extract method
- *
+/* Smell code : Insufficient Modularization
+ * Reasons : Semua logika berada di dalam satu class, tidak dipisahkan berdasarkan tanggung jawabnya.
+ * Solutions : pindah logika yang berhubungan dengan query database ke class AccountRepository
  * 
+ * Smell code : Duplicate Code
+ * Reasons : Developer lebih suka membuat logika yang ditulis berulang , dibanding membuatnya menjadi satu method baru,
+ *           logika untuk mendapatkan account_number berdasarkan email diulang 2 kali pada method getAccount_number() dan 
+ *           method account_exist()
+ * Solutions : buat method getAccountNumberByEmail() di AccountRepository();
  */
 
 

@@ -19,20 +19,16 @@ public class BankingApp {
     }
 
 	public static void headerOfFrontPage() {
-		System.out.println("|^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^|");
-		System.out.println("|                                                         |");
-		System.out.println("|                                                         |");
-		System.out.println("|          █▓▒▒░░░𝓦 𝓔 𝓛 𝓒 𝓞 𝓜 𝓔   𝓣 𝓞 ░░░▒▒▓█             |");
-		System.out.println("|█▓▒▒░░░B A N K   M A N A G E M E N T   S Y S T E M░░░▒▒▓█|");
-		System.out.println("|                                                         |");
-		System.out.println("|                                                         |");
-		System.out.println("|=========================================================|");
+		System.out.println("Welcome to AJK Banking System");
+        System.out.println("===================================");
 	}
     
-	private static final  String connectUrl="jdbc:sqlserver://dEVICEnAME\\SQLEXPRESS;DatabaseName=BankManagementSystem;IntegratedSecurity=true;encrypt=true;trustServerCertificate=true";
+    // IMPORTANT: bagian ini LAPTOP-K898R5D0 --> diganti dengan nama laptop kalian klo mw ngerun aplikasi ini
+	private static final  String connectUrl="jdbc:sqlserver://LAPTOP-K898R5D0\\SQLEXPRESS;DatabaseName=BankManagementSystem;IntegratedSecurity=true;encrypt=true;trustServerCertificate=true";
     public static void main(String[] args) {
     	headerOfFrontPage();
         try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection connection = DriverManager.getConnection(connectUrl);
             Scanner scanner =  new Scanner(System.in);
             User user = new User(connection, scanner);
@@ -63,7 +59,9 @@ public class BankingApp {
                         break;
                 }
             }
-        }catch (SQLException e){
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
