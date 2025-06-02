@@ -3,13 +3,13 @@ package solutions;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class LoginService {
+public class UserSessionService {
     private final Scanner scanner;
     private final User user;
     private final Accounts accounts;
     private final AccountManager accountManager;
     
-    public LoginService(Scanner scanner, User user, Accounts accounts, AccountManager accountManager) {
+    public UserSessionService(Scanner scanner, User user, Accounts accounts, AccountManager accountManager) {
         this.scanner = scanner;
         this.user = user;
         this.accounts = accounts;
