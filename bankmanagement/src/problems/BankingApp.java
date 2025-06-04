@@ -21,11 +21,6 @@ import java.util.*;
  * Code Smell 		: Duplicate Code
  * Reason 		: Terdapat code yang digunakan lebih dari sekali yaitu untuk input choice
  * Solution		: Extract Method
- * 
- * Code Smell 		: Multifaced Abstraction
- * Reason 		: Class BankingApp menyatukan berbagai jenis logika user handling, account management, transaksi, dan UI dalam satu Class,
- *         			sehingga terlalu banyak memiliki tanggung jawab.
- * Solution		: Move Method or Extract Class
  *
  * Code Smell 		: Insufficient Modularization
  * Reason		: Pada Class BankingApp terlalu memiliki tanggung jawab dan method yang banyak Dimana sebaiknya abstraksi atau tanggung jawab dipisahkan ke beberapa abstraction lagi

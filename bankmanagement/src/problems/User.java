@@ -7,6 +7,14 @@ import java.util.*;
  * reason: function seperti register() dan login() memiliki kode yang numpuk dengan tanggung jawab beda
  *         seperti handle user input, sql queries, dan validasi input.
  * solution: extract method
+ * 
+ * Smell code : Large Class
+ * Reason : Class User menangani banyak tugas sehingga melanggar Single Responsibility
+ * Solution : Extract Class
+ * 
+ * Smell code : Duplicate Code 
+ * Reason : Penggunaan dari syntax PreparedStatement akan berulang kali digunakan jika ada aksi komunikasi dengan database.
+ * Solution : Extract Method dan Move Method.
  */
 
 public class User {
