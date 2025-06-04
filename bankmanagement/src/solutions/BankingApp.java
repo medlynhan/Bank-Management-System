@@ -31,10 +31,9 @@ public class BankingApp {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             Connection connection = DriverManager.getConnection(connectUrl);
             Scanner scanner =  new Scanner(System.in);
-            User user = new User(connection, scanner);
             Accounts accounts = new Accounts(connection, scanner);
             AccountManager accountManager = new AccountManager(connection, scanner);
-            UserSessionService userService = new UserSessionService(scanner, user, accounts, accountManager);
+            UserSessionService userService = new UserSessionService(scanner, accounts, accountManager, new UserRepository(connection));
 
             while(true){
                 printMenu();
@@ -42,7 +41,7 @@ public class BankingApp {
                 
                 switch (choice1){
                     case 1:
-                        user.register();
+                        userService.register();
                         break;
                     case 2:
                         userService.handleLogin();

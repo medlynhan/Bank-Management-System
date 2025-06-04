@@ -5,28 +5,50 @@ import java.util.Scanner;
 
 public class UserSessionService {
     private final Scanner scanner;
-    private final User user;
     private final Accounts accounts;
     private final AccountManager accountManager;
-    
-    public UserSessionService(Scanner scanner, User user, Accounts accounts, AccountManager accountManager) {
+    private final UserRepository userRepository;
+
+    public UserSessionService(Scanner scanner, Accounts accounts, AccountManager accountManager, UserRepository userRepository) {
         this.scanner = scanner;
-        this.user = user;
         this.accounts = accounts;
         this.accountManager = accountManager;
+        this.userRepository = userRepository;
     }
-    
-    public void handleLogin() {
-        String email = user.login();
-        if (email != null) {
-            System.out.println("\nUser Logged In!");
 
+    public void register() {
+        scanner.nextLine();
+        System.out.print("Full Name: ");
+        String fullName = scanner.nextLine();
+        System.out.print("Email: ");
+        String email = scanner.nextLine();
+        System.out.print("Password: ");
+        String password = scanner.nextLine();
+        if(userRepository.userExists(email)) {
+            System.out.println("User Already Exists for this Email Address!!");
+            return;
+        }
+        if (userRepository.registerUser(fullName, email, password)) {
+            System.out.println("Registration Successful!");
+        } else {
+            System.out.println("Registration Failed!");
+        }
+    }
+
+    public void handleLogin() {
+        scanner.nextLine();
+        System.out.print("Email: ");
+        String email = scanner.nextLine();
+        System.out.print("Password: ");
+        String password = scanner.nextLine();
+
+        if (userRepository.validateLogin(email, password)) {
+            System.out.println("\nUser Logged In!");
             long accountNumber = checkAccountExist(email);
             if (accountNumber == 0) {
                 System.out.println("There is no account.");
                 return;
             }
-
             loginMenu(accountNumber);
         } else {
             System.out.println("Invalid Email or Password!");
@@ -90,6 +112,7 @@ public class UserSessionService {
             }
         }
     }
+
     private void printAccountMenu() {
         System.out.println("\nAccount Menu:");
         System.out.println("1. Debit Money");
